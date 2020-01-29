@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>  
+
+<style >
+
+	table{width:100%;}
+table td, table th { border: 1px solid grey;}
+table th { background: #eee;}
+.pagination-div{user-select: none;}
+.pagination-div span{border-radius:3px;border:1px solid #999;
+   padding:2px;margin:10px 0px 0px 10px;display:inline-block}
+span.selected{background:#ccf;}
+
+</style>
+
+<link rel="stylesheet" type="text/css" th:href="@{../css/main.css}" />
+</head>
+<div th:replace="fragments/top :: top"></div>
+<div th:replace="fragments/form_one_class_teacher :: formoneclassteacher"></div>
+<!-- content be inserted below -->
+Register new Student Form 1 and 2
+<!-- content be inserted above -->
+</div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      >
+      
+      <head>
+        <title>AccessDenied</title>
+        <link rel="stylesheet" th:href="@{/assets/bootstrap/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/assets/font-awesome-4.5.0/css/font-awesome.min.css}" />
+<link rel="stylesheet" th:href="@{/assets/css/styles.css}" />
+<script th:src="@{'/assets/js/jquery-2.1.4.min.js'}"></script>
+	<script th:src="@{'/assets/bootstrap/js/bootstrap.min.js'}"></script>
+    </head>
+    <body>
+    	    
+    	<div class="alert alert-info alert-dismissable">
+									<p>
+										<i class="icon fa fa-info"></i> <span>You are not authorized to view this page!!.</span>
+									</p>
+								</div>	
+    </body>
+    
+</html>

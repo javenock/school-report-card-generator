@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>  
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/webjars/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
+<link rel = "stylesheet" href="/webjars/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" th:href="@{../css/main.css}" />
+</head>
+<div th:replace="fragments/top :: top"></div>
+<div th:replace="fragments/form3_class_teacher :: formthreeclassteacher"></div>
+<!-- content be inserted below -->
+
+<p><I>Form Three Class Teacher</I></p>
+<marquee onMouseOver="this.stop()" onMouseOut="this.start()">Hi Teacher, Click The Button Below on your Right..</marquee>
+<form th:action="@{/_teacher/no_subject}" > 
+ 				 						
+ 						<div class="modal-footer">
+ 					<input type="submit" class="btn btn-primary" value="Update Student Information" />
+ 				</div> 				
+ 				</form>
+<!-- content be inserted above -->
+</div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</html>

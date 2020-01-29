@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>  
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/webjars/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
+<link rel = "stylesheet" href="/webjars/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" />
+<script type="text/javascript" th:src="@{../js/subject.js}" src="../static/js/subject.js"></script>
+<link rel="stylesheet" type="text/css" th:href="@{../css/main.css}" />
+</head>
+<div th:replace="fragments/top :: top"></div>
+<div th:replace="fragments/form4/form4_nav/chem :: nav_four_sciences_chem"></div>
+<!-- content be inserted below -->
+<body>
+<div class="container">
+<div class="card">	
+		<div class="card-block">
+			<table id="mytable" class="display_table">
+				<thead>
+					<tr>
+						<th>Regno</th>					
+						<th>Stream</th>
+						<th>Chemistry</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+			<tfoot>
+				<tr>
+					<th>Regno</th>					
+						<th>Stream</th>
+						<th>Chemistry</th>
+						<th>Action</th>
+				</tr>
+			</tfoot>
+			<tbody>
+				<tr th:each = "study : ${student_record}">
+					<td th:text="${study.regno}"></td>
+					<td th:text="${study.stream}"></td>
+					<td th:text="${study.chemistry}"></td>
+					<td><a th:href="@{/form4_teacher/select_one_f4_std(regno=${study.regno})}" class="btn btn-primary f3_Btn">Edit</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</div>
+<div class=student_subject> 
+ 	<form th:action="@{/form4_teacher/save_chem_sub}"  method="post" name = "newStudent" onsubmit = "return(validate());" > 	
+ 		<div class="modal fade" id="exampleModal" tabindex ="-1" role="dialog" aria-labelledby="exampleModallabel" aria-hidden="true"> 		
+ 			<div class="modal-dialog" role="document">
+ 				<div class="modal-content"> 				
+ 					<div class="modal-header"> 					
+ 					<h5 class="modal-title" id="exampleModallabel">New Student Registration Form</h5> 					
+ 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+ 						<span aria-hidden="true">&times;</span>
+ 						</button>
+ 					</div>
+ 				<div class="modal-body">
+ 					<div class="form-group">
+ 					<label for="regno" class="form-control-label" >Adm No  :</label>
+ 					<input type="text" class="form-control" id="regno" name="regno" value="" placeholder = "admission no" readonly=readonly>
+ 					</div>
+ 					 					
+ 					
+ 					<div class="form-group">
+ 					<label for="stream" class="form-control-label" >Stream  :</label>
+ 					<input type="text" class="form-control" id="stream" name="stream" value="" placeholder = "stream" readonly=readonly>
+ 					</div>
+ 					 					
+ 					<div class="form-group">
+ 					<label for="chemistry" class="form-control-label" >Chemistry  :</label>
+ 					<select class="form-control" name = "chemistry">
+ 						<option value = "-1" selected>[choose YES / NO]</option>
+ 						<option value = "CHEMISTRY" >YES</option>
+ 						<option value = "" >NO</option>
+ 						</select></div>
+ 				</div>
+ 				<div class="modal-footer">
+ 					<button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+ 					<input type="submit" class="btn btn-primary" value="save" />
+ 				</div>
+ 				</div>
+ 			
+ 			</div>
+ 		
+ 		</div>
+
+ 	</form>
+  </div>
+ </body>
+<!-- content be inserted above -->
+</div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</html>

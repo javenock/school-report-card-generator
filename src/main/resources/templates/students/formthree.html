@@ -1,0 +1,232 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>  
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/webjars/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
+<link rel = "stylesheet" href="/webjars/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" />
+
+<script type="text/javascript" th:src="@{../js/student.js}" src="../static/js/student.js"></script>
+<link rel="stylesheet" type="text/css" th:href="@{../css/main.css}" />
+
+
+</script> 
+</head>
+<div th:replace="fragments/top :: top"></div>
+<div th:replace="fragments/form3_class_teacher :: formthreeclassteacher"></div>
+<!-- content be inserted below -->
+<body>
+<div class="container">
+<button class="btn btn-success nBtn">New Student</button>
+<div class="card">	
+		<div class="card-block">
+			<table id="mytable" class="display">
+				<thead>
+					<tr>
+						<th>Regno</th>
+						<th>F name</th>
+						<th>Form</th>
+						<th>Stream</th>
+						<th>Gender</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+			<tfoot>
+				<tr>
+					<th>Regno</th>
+					<th>F name</th>
+						<th>Form</th>
+						<th>Stream</th>
+						<th>Gender</th>
+					<th>Action</th>
+				</tr>
+			</tfoot>
+			<tbody>
+				<tr th:each = "study : ${student_record}">
+					<td th:text="${study.regno}"></td>
+					<td th:text="${study.fname}"></td>
+					<td th:text="${study.form}"></td>
+					<td th:text="${study.stream}"></td>
+					<td th:text="${study.gender}"></td>
+					<td><a th:href="@{/_teacher/select_one_f3_std(regno=${study.regno})}" class="btn btn-primary new_f3_Btn">Edit</a>
+					<a th:href="@{/_teacher/delete_f3_std(regno=${study.regno})}" class="btn btn-danger delBtn">Delete</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</div>
+<div class="new_student"> 
+ 	<form th:action="@{/_teacher/save_three_student}"  method="post" name = "newStudent" onsubmit = "return(validate());" > 	
+ 		<div class="modal fade" id="exampleModal" tabindex ="-1" role="dialog" aria-labelledby="exampleModallabel" aria-hidden="true"> 		
+ 			<div class="modal-dialog" role="document">
+ 				<div class="modal-content"> 				
+ 					<div class="modal-header"> 					
+ 					<h5 class="modal-title" id="exampleModallabel">New Student Registration Form</h5> 					
+ 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+ 						<span aria-hidden="true">&times;</span>
+ 						</button>
+ 					</div>
+ 				<div class="modal-body">
+ 					<div class="form-group">
+ 					<label for="regno" class="form-control-label" >Reg No</label>
+ 					<input type="text" class="form-control" id="regno" name="regno" value="" placeholder = "admission no" onkeypress="return isNumberKey(event)" required>
+ 					</div>
+ 					
+ 					<div class="form-group">
+ 					<label for="fname" class="form-control-label" >First Name</label>
+ 					<input type="text" class="form-control" id="fname" name="fname" placeholder ="name" value="" oninput="this.value = this.value.toUpperCase()" required>
+ 					</div> 					
+ 					
+ 					<div class="form-group">
+ 					<label for="form" class="form-control-label" >Form  :</label>
+ 					<select class = "form-control" name = "form" required ="">
+ 						<option value = "" selected>[choose Form]</option>
+ 						<option value = "THREE" >THREE</option>
+ 						</select></div>
+ 					
+ 					<div class="form-group"> 					
+ 					<label for="stream" class="form-control-label" >Stream  :</label>
+ 					<select class="form-control" name = "stream" required ="">
+ 						<option value = "" selected>[choose Stream]</option>
+ 						<option value = "NORTH" >NORTH</option>
+ 						<option value = "EAST" >EAST</option>
+ 						<option value = "WEST" >WEST</option>
+ 						<option value = "SOUTH" >SOUTH</option>
+ 					</select></div>
+ 					
+ 					<div class="form-group">
+ 					<label for="year" class="form-control-label" >Year  :</label>
+ 					<select class="form-control" name = "year" required ="">
+ 						<option value = "" selected>[choose Year]</option>
+ 						<option value = "2019" >2019</option>
+ 						<option value = "2020" >2020</option>
+ 						<option value = "2021" >2021</option>
+ 						<option value = "2022" >2022</option>
+ 					</select></div>
+ 					
+ 					<div class="form-group">
+ 					<label for="gender" class="form-control-label" >Gender  :</label>
+ 					<select class="form-control" name = "gender" required ="">
+ 						<option value = "" selected>[choose Gender]</option>
+ 						<option value = "Male" >Male</option>
+ 						<option value = "Female" >Female</option>
+ 						</select></div>
+ 					<div class="form-group">
+ 					<label for="kcpemarks" class="form-control-label" >K.C.P.E Marks :</label>
+ 					<input type="number" class="form-control" id="kcpemarks" name="kcpemarks" value="" placeholder = "k.c.p.e marks" onkeypress="return isNumberKey(event)" min ="0" max="500" required>
+ 					</div>
+ 				</div>
+ 				<div class="modal-footer">
+ 					<button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+ 					<input type="submit" class="btn btn-primary" value="save" />
+ 				</div>
+ 				</div>
+ 			
+ 			</div>
+ 		
+ 		</div>
+
+ 	</form>
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Student</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p alert alert-danger>Are you sure you want to delete this student ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <a href="" class="btn btn-danger" id="delRef">delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+ </div>
+ <div class="update_student"> 
+ 	<form th:action="@{/_teacher/update_three_student}"  method="post" name = "updateStudent" onsubmit = "return(validate());" > 	
+ 		<div class="modal fade" id="exampleModal" tabindex ="-1" role="dialog" aria-labelledby="exampleModallabel" aria-hidden="true"> 		
+ 			<div class="modal-dialog" role="document">
+ 				<div class="modal-content"> 				
+ 					<div class="modal-header"> 					
+ 					<h5 class="modal-title" id="exampleModallabel">Student Update Form</h5> 					
+ 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+ 						<span aria-hidden="true">&times;</span>
+ 						</button>
+ 					</div>
+ 				<div class="modal-body">
+ 					<div class="form-group">
+ 					<label for="regno" class="form-control-label" >Reg No</label>
+ 					<input type="text" class="form-control" id="regno" name="regno" value="" placeholder = "admission no" onkeypress="return isNumberKey(event)" required>
+ 					</div>
+ 					
+ 					<div class="form-group">
+ 					<label for="fname" class="form-control-label" >First Name</label>
+ 					<input type="text" class="form-control" id="fname" name="fname" placeholder ="name" value="" oninput="this.value = this.value.toUpperCase()" required>
+ 					</div> 					
+ 					
+ 					<div class="form-group">
+ 					<label for="form" class="form-control-label" >Form  :</label>
+ 					<select class = "form-control" name = "form" required ="">
+ 						<option value = "" selected>[choose Form]</option>
+ 						<option value = "THREE" >THREE</option>
+ 						</select></div>
+ 					
+ 					<div class="form-group"> 					
+ 					<label for="stream" class="form-control-label" >Stream  :</label>
+ 					<select class="form-control" name = "stream" required ="">
+ 						<option value = "" selected>[choose Stream]</option>
+ 						<option value = "NORTH" >NORTH</option>
+ 						<option value = "EAST" >EAST</option>
+ 						<option value = "WEST" >WEST</option>
+ 						<option value = "SOUTH" >SOUTH</option>
+ 					</select></div>
+ 					
+ 					<div class="form-group">
+ 					<label for="year" class="form-control-label" >Year  :</label>
+ 					<select class="form-control" name = "year" required ="">
+ 						<option value = "" selected>[choose Year]</option>
+ 						<option value = "2019" >2019</option>
+ 						<option value = "2020" >2020</option>
+ 						<option value = "2021" >2021</option>
+ 						<option value = "2022" >2022</option>
+ 					</select></div>
+ 					
+ 					<div class="form-group">
+ 					<label for="gender" class="form-control-label" >Gender  :</label>
+ 					<select class="form-control" name = "gender" required ="">
+ 						<option value = "" selected>[choose Gender]</option>
+ 						<option value = "Male" >Male</option>
+ 						<option value = "Female" >Female</option>
+ 						</select></div>
+ 					<div class="form-group">
+ 					<label for="kcpemarks" class="form-control-label" >K.C.P.E Marks :</label>
+ 					<input type="number" class="form-control" id="kcpemarks" name="kcpemarks" value="" placeholder = "k.c.p.e marks" onkeypress="return isNumberKey(event)" min ="0" max="500" required>
+ 					</div>
+ 				</div>
+ 				<div class="modal-footer">
+ 					<button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+ 					<input type="submit" class="btn btn-primary" value="save" />
+ 				</div>
+ 				</div>
+ 			
+ 			</div>
+ 		
+ 		</div>
+
+ 	</form>
+ 
+ </div>
+ </body>
+<!-- content be inserted above -->
+</div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</html>

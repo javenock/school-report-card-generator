@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>  
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/webjars/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
+<link rel = "stylesheet" href="/webjars/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" />
+<script type="text/javascript" th:src="@{../js/main.js}" src="../static/js/main.js"></script>
+<link rel="stylesheet" type="text/css" th:href="@{../css/main.css}" />
+</head>
+<div th:replace="fragments/top :: top"></div>
+<div th:replace="fragments/formOneMarksEntry :: nav_one_languages_marks_input"></div>
+<!-- content be inserted below -->
+<script type="text/javascript">
+function validate(){
+	if((document.myFrm_tech.agric.value > 100 || document.myFrm_tech.agric.value < 0)|| (document.myFrm_tech.biz.value > 100 || document.myFrm_tech.biz.value < 0)|| (document.myFrm_tech.comp.value > 100 || document.myFrm_tech.comp.value < 0) || (document.myFrm_tech.hom.value > 100 || document.myFrm_tech.hom.value < 0)){
+		alert("oops !!! please provide value in the range 0 - 100");
+		return false;
+	}
+	return (true);
+}
+
+</script>
+<br/>
+<body>
+<div class="card">	
+		<div class="card-block">
+			<table id="mytable" class="display">
+				<thead>
+					<tr>
+						<th>Regno</th>
+						<th>Stream</th>
+						<th>Agriculture</th>
+					   <th>Business</th>
+					   <th>Computer</th>
+					   <th>Home-Science</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+			<tfoot>
+				<tr>
+					<th>Regno</th>
+					<th>Stream</th>
+					<th>Agriculture</th>
+					<th>Business</th>
+					<th>Computer</th>
+					<th>Home-Science</th>
+					<th>Action</th>
+				</tr>
+			</tfoot>
+			<tbody>
+				<tr th:each = "study : ${tech_mks_input}">
+					<td th:text="${study.regno}"></td>
+					<td th:text="${study.stream}"></td>
+					<td th:text="${study.agric}"></td>
+					<td th:text="${study.biz}"></td>
+					<td th:text="${study.comp}"></td>
+					<td th:text="${study.hom}"></td>
+					<td><a th:href="@{/form_one/findOne_std_marks(id=${study.regno})}" class="btn btn-primary techBtn">Edit</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="techmyForm"> 
+ 	<form th:action="@{/form_one/save_tech}"  method="post" name = "myFrm_tech" onsubmit = "return(validate());"> 	
+ 		<div class="modal fade" id="exampleModal" tabindex ="-1" role="dialog" aria-labelledby="exampleModallabel" aria-hidden="true"> 		
+ 			<div class="modal-dialog" role="document">
+ 				<div class="modal-content"> 				
+ 					<div class="modal-header"> 					
+ 					<h5 class="modal-title" id="exampleModallabel">Update</h5> 					
+ 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+ 						<span aria-hidden="true">&times;</span>
+ 						</button>
+ 					</div>
+ 				<div class="modal-body">
+ 					<div class="form-group">
+ 					<label for="regno" class="form-control-label" >Reg No</label>
+ 					<input type="text" class="form-control" id="regno" name="regno" value="" readonly=readonly>
+ 					</div>
+ 					
+ 					<div class="form-group">
+ 					<label for="agric" class="form-control-label" >Agriculture</label>
+ 					<input type="text" class="form-control" id="agric" name="agric" placeholder ="agriculture" value="" onkeypress="return isNumberKey(event)">
+ 					</div>
+ 					
+ 					<div class="form-group">
+ 					<label for="biz" class="form-control-label" >Business</label>
+ 					<input type="text" class="form-control" id="biz" name="biz" placeholder ="business" value="" onkeypress="return isNumberKey(event)">
+ 					</div>
+ 					
+ 					<div class="form-group">
+ 					<label for="comp" class="form-control-label" >Computer</label>
+ 					<input type="text" class="form-control" id="comp" name="comp" placeholder ="computer" value="" onkeypress="return isNumberKey(event)">
+ 					</div>
+ 					
+ 					<div class="form-group">
+ 					<label for="hom" class="form-control-label" >HomeScience</label>
+ 					<input type="text" class="form-control" id="hom" name="hom" placeholder ="home_science" value="" onkeypress="return isNumberKey(event)">
+ 					</div>
+ 				</div>
+ 				<div class="modal-footer">
+ 				
+ 					<button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+ 					
+ 					<input type="submit" class="btn btn-primary" value="save" />
+ 				</div>
+ 				</div>
+ 			
+ 			</div>
+ 		
+ 		</div>
+ 		
+ 	</form>
+ 
+ </div>
+ </body>
+<!-- content be inserted above -->
+</div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</html>

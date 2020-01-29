@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>  
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/webjars/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
+<link rel = "stylesheet" href="/webjars/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" />
+<style >
+
+	table{width:100%;}
+table td, table th { border: 1px solid grey;}
+table th { background: #eee;}
+.pagination-div{user-select: none;}
+.pagination-div span{border-radius:3px;border:1px solid #999;
+   padding:2px;margin:10px 0px 0px 10px;display:inline-block}
+span.selected{background:#ccf;}
+
+</style>
+
+<link rel="stylesheet" type="text/css" th:href="@{../css/main.css}" />
+</head>
+<div th:replace="fragments/top :: top"></div>
+<div th:replace="fragments/formoneadmin :: formoneadmin"></div>
+<!-- content be inserted below -->
+<a th:href="@{/admin/formonedetails}">New</a><br/><br/>
+
+	<form th:action="@{/admin/examtypeupdate}" > 
+ 				
+ 					<select class="form-control" name = "type">
+ 						<option value="all">-- Exam Type --</option>
+       						 <option value="EXAM1">EXAM1</option>
+        							<option value="EXAM2">EXAM2</option>
+      								  <option value="EXAM3">EXAM3</option> 
+       									 <option value="SPECIAL">SPECIAL</option>
+ 						</select> 					
+ 						<div class="modal-footer">
+ 					<input type="submit" class="btn btn-primary" value="Exam Type" />
+ 				</div> 	 				
+ 	</form>
+	<form th:action="@{/admin/termupdate}" > 
+ 							
+ 					<select class="form-control" name = "term">
+ 						<option value="all">-- TERM --</option>
+      					  <option value="1">TERM ONE</option>
+     					   <option value="2">TERM TWO</option>
+      						  <option value="3">TERM THREE</option>
+ 						</select>					
+ 						<div class="modal-footer">
+ 					<input type="submit" class="btn btn-primary" value="Term" />
+ 				</div> 				
+ 				</form>
+
+<br/><br/>
+<table>
+			<tr>
+				<th>REG NO</th>
+			   <th>STREAM</th>
+			    <th>YEAR</th>
+			    <th>ExamType</th>
+			    <th>Term</th>
+				<th>ENG</th>
+				<th>MAT</th>
+				<th>KIS</th>
+				<th>BIO</th>
+				<th>CHE</th>
+				<th>PHY</th>
+				<th>GEO</th>
+				<th>HIS</th>
+				<th>CRE</th>
+				<th>AGR</th>
+				<th>BUS</th>
+				<th>COMP</th>
+				<th>HOM</th>
+				<th>TTP</th>
+				<th>AVGP</th>
+				<th>AvgG</th>
+				<th>CL Psn</th>
+				<th>Ov Psn</th>		
+				
+			</tr>
+		
+		
+				<tr th:each = "al_students : ${page}">
+					<td th:text="${al_students.regno}"></td>
+					<td th:text="${al_students.stream}"></td>
+					<td th:text="${al_students.year}"></td>
+					<td th:text="${al_students.examtype}"></td>
+					<td th:text="${al_students.term}"></td>
+					<td th:text= "${al_students.eng} + ${al_students.eng_grade}"></td>
+					<td th:text="${al_students.math} + ${al_students.math_grade}"></td>
+					<td th:text="${al_students.kis} + ${al_students.kis_grade}"></td>					
+					<td th:text="${al_students.bio} + ${al_students.bio_grade}"></td>
+					<td th:text="${al_students.chem} + ${al_students.chem_grade}"></td>
+					<td th:text="${al_students.phy} + ${al_students.phy_grade}"></td>					
+					<td th:text="${al_students.geo} + ${al_students.geo_grade}"></td>
+					<td th:text="${al_students.his} + ${al_students.his_grade}"></td>					
+					<td th:text="${al_students.cre} + ${al_students.cre_grade}"></td>
+					<td th:text="${al_students.agric} + ${al_students.agric_grade}"></td>
+					<td th:text="${al_students.biz} + ${al_students.biz_grade}"></td>
+					<td th:text="${al_students.comp} + ${al_students.comp_grade}"></td>
+					<td th:text="${al_students.hom} + ${al_students.hom_grade}"></td>
+					<td th:text="${al_students.tt}"></td>
+					<td th:text="${al_students.avg}"></td>
+					<td th:text="${al_students.ov_grade}"></td>
+					<td th:text="${al_students.crank}"></td>
+					<td th:text="${al_students.rank}"></td> 
+					
+				</tr>
+			
+		</table>
+<div class="pagination-div">
+    <span th:if="${page.hasPrevious()}">
+        <a th:href="@{/admin/formone_new_exam(page=${page.number-1},size=${page.size})}">Previous</a>
+    </span>
+    <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+        <span th:if="${page.number == i}" class="selected">[[${i}+1]]</span>
+        <span th:unless="${page.number == i}">
+             <a th:href="@{/admin/formone_new_exam(page=${i},size=${page.size})}">[[${i}+1]]</a>
+        </span>
+    </th:block>
+    <span th:if="${page.hasNext()}">
+        <a th:href="@{/admin/formone_new_exam(page=${page.number+1},size=${page.size})}">Next</a>
+    </span>
+</div>
+<br/><br/>
+<a th:href="@{/admin/form_totla}">TOTALs</a> |  
+	<a th:href="@{/admin/formoneclassranking}">Class Rankng</a>  |  
+	<a th:href="@{/admin/markListAverage}">Overal Ranking</a><br/><br/>
+	<a th:href="@{/admin/backup}">BACK UP</a>
+<!-- content be inserted above -->
+</div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>SHOW ALL STUDENTS</title>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/webjars/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
+<link rel = "stylesheet" href="/webjars/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" />
+<script type="text/javascript" th:src="@{js/main.js}" src="../static/js/main.js"></script>
+<link rel="stylesheet" type="text/css" th:href="@{./css/main.css}" />
+</head>
+<div th:replace="fragments/top :: top"></div>
+<div th:replace="fragments/nav :: nav"></div>
+<!-- content be inserted below -->
+<body>
+	<div class="card">	
+		<div class="card-block">
+			<table id="mytable" class="display">
+				<thead>
+					<tr>
+						<th>Regno</th>
+						<th>F Name</th>
+						<th>Sir Name</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+			<tfoot>
+				<tr>
+					<th>Regno</th>
+					<th>F Name</th>
+					<th>Sir Name</th>
+					<th>Action</th>
+				</tr>
+			</tfoot>
+			<tbody>
+				<tr th:each = "study : ${std}">
+					<td th:text="${study.regno}"></td>
+					<td th:text="${study.fname}"></td>
+					<td th:text="${study.sirname}"></td>				
+					<td><a th:href="@{findOne(id=${study.regno})}" class="btn btn-primary eBtn">Edit</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="myForm"> 
+ 	<form th:action="@{/save1}"  method="post"> 	
+ 		<div class="modal fade" id="exampleModal" tabindex ="-1" role="dialog" aria-labelledby="exampleModallabel" aria-hidden="true"> 		
+ 			<div class="modal-dialog" role="document">
+ 				<div class="modal-content"> 				
+ 					<div class="modal-header"> 					
+ 					<h5 class="modal-title" id="exampleModallabel">Update</h5> 					
+ 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+ 						<span aria-hidden="true">&times;</span>
+ 						</button>
+ 					</div>
+ 				<div class="modal-body">
+ 					<div class="form-group">
+ 					<label for="regno" class="form-control-label" >Reg No</label>
+ 					<input type="text" class="form-control" id="regno" name="regno" value="" readonly=readonly>
+ 					</div>
+ 					
+ 					<div class="form-group">
+ 					<label for="fname" class="form-control-label" >F Name</label>
+ 					<input type="text" class="form-control" id="fname" name="fname" value="">
+ 					</div>
+ 					
+ 					<div class="form-group">
+ 					<label for="sirname" class="form-control-label" >Sir Name</label>
+ 					<input type="text" class="form-control" id="sirname" name="sirname" value="">
+ 					</div>
+ 				</div>
+ 				<div class="modal-footer">
+ 					<button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+ 					
+ 					<input type="submit" class="btn btn-primary" value="save" />
+ 				</div>
+ 				</div>
+ 			
+ 			</div>
+ 		
+ 		</div>
+ 		
+ 	</form>
+ 
+ </div>
+
+
+</body>
+</div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+
+</html>

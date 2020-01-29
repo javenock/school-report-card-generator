@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+</head>
+<body>
+<div th:fragment="top">
+<div class="border-around">
+<div class="header">
+  <h1>Javenock</h1>
+  <p><b>School</b> website created by <b><i>Me<i></b></i></p>
+</div>
+
+ <div class="topnavi" id="mytopnavi">
+  <a href="/" class="active">Home</a>
+  <a href="#news">News</a>
+  <a href="#contact">Contact</a>
+  <div class="dropdowni">
+    <button class="dropbtn1">Form 1
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdowni-content">
+      <a th:href="@{/formOneLanguages}">Marks Input</a>
+      <a th:href="@{/admin/form_one}">Administrator</a>
+    </div>
+  </div>
+  <div class="dropdowni">
+    <button class="dropbtn1">Form 2
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdowni-content">
+      <a th:href="@{/form_2_/form2_marks_input}">Marks Input</a>
+      <a th:href="@{/form2_admin/form_two}">Administrator</a>
+    </div>
+  </div>
+  <div class="dropdowni">
+    <button class="dropbtn1">Form 3
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdowni-content">
+   	  <a th:href="@{/formthree_input/form_three_languages}">Languages</a>
+      <a th:href="@{/formthree_input/form_three_science}">Sciences</a>
+      <a th:href="@{/formthree_input/form_three_humanity}">Humanities</a>
+      <a th:href="@{/formthree_input/form_three_technical}">Technicals</a>
+      <a th:href="@{/form_three_admin/form_three_admin_screen}">Administrator</a>
+    </div>
+  </div>
+  <div class="dropdowni">
+    <button class="dropbtn1">Form 4
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdowni-content">
+       <a th:href="@{/formfour_input/form_four_languages}">Languages</a>
+      <a th:href="@{/formfour_input/form_four_science}">Sciences</a>
+      <a th:href="@{/formfour_input/form_four_humanity}">Humanities</a>
+      <a th:href="@{/formfour_input/form_four_technical}">Technicals</a>
+      <a th:href="@{/form_four_admin/form_four_admin_screen}">Administrator</a>
+    </div>
+  </div>
+  <div class="dropdowni">
+    <button class="dropbtn1">Class Teachers
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdowni-content">
+      <a th:href="@{/class_teacher/classTeacherPage}">Form 1</a>
+      <a th:href="@{/form_two_teacher/f2_TeacherPage}">Form 2</a>
+      <a th:href="@{/form3_class_teacher/form_three_class_teacher_page}">Form 3</a>
+      <a th:href="@{/form4_teacher/form_four_class_teacher_page}">Form 4</a>
+      </div>
+  </div>
+  <a href="#about">About</a>
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+</div> 

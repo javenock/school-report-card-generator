@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>  
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/webjars/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
+<link rel = "stylesheet" href="/webjars/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" />
+<script type="text/javascript" th:src="@{../js/main.js}" src="../static/js/main.js"></script>
+<link rel="stylesheet" type="text/css" th:href="@{../css/main.css}" />
+</head>
+<div th:replace="fragments/top :: top"></div>
+<div th:replace="fragments/formOneMarksEntry :: nav_one_languages_marks_input"></div>
+<!-- content be inserted below -->
+<script type="text/javascript">
+function validate(){
+	if((document.myFrm_hum.geo.value > 100 || document.myFrm_hum.geo.value < 0)|| (document.myFrm_hum.his.value > 100 || document.myFrm_hum.his.value < 0)|| (document.myFrm_hum.cre.value > 100 || document.myFrm_hum.cre.value < 0)){
+		alert("oops !!! please provide value in the range 0 - 100");
+		return false;
+	}
+	return (true);
+}
+
+</script>
+
+<br/>
+<body>
+<div class="card">	
+		<div class="card-block">
+			<table id="mytable" class="display">
+				<thead>
+					<tr>
+						<th>Regno</th>
+						<th>Stream</th>
+						<th>Geography</th>
+						<th>History</th>
+						<th>Cre</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+			<tfoot>
+				<tr>
+					<th>Regno</th>
+					<th>Stream</th>
+					<th>Geography</th>
+						<th>History</th>
+						<th>Cre</th>
+					<th>Action</th>
+				</tr>
+			</tfoot>
+			<tbody>
+				<tr th:each = "study : ${hum_mks_input}">
+					<td th:text="${study.regno}"></td>
+					<td th:text="${study.stream}"></td>
+					<td th:text="${study.geo}"></td>
+					<td th:text="${study.his}"></td>
+					<td th:text="${study.cre}"></td>
+					<td><a th:href="@{/form_one/findOne_std_marks(id=${study.regno})}" class="btn btn-primary humBtn">Edit</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="hummyForm"> 
+ 	<form th:action="@{/form_one/save_hum}"  method="post" name = "myFrm_hum" onsubmit = "return(validate());"> 	
+ 		<div class="modal fade" id="exampleModal" tabindex ="-1" role="dialog" aria-labelledby="exampleModallabel" aria-hidden="true"> 		
+ 			<div class="modal-dialog" role="document">
+ 				<div class="modal-content"> 				
+ 					<div class="modal-header"> 					
+ 					<h5 class="modal-title" id="exampleModallabel">Update</h5> 					
+ 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+ 						<span aria-hidden="true">&times;</span>
+ 						</button>
+ 					</div>
+ 				<div class="modal-body">
+ 					<div class="form-group">
+ 					<label for="regno" class="form-control-label" >Reg No</label>
+ 					<input type="text" class="form-control" id="regno" name="regno" value="" readonly=readonly>
+ 					</div>
+ 					
+ 					<div class="form-group">
+ 					<label for="geo" class="form-control-label" >Geography</label>
+ 					<input type="text" class="form-control" id="geo" name="geo" placeholder ="geography" value="" onkeypress="return isNumberKey(event)">
+ 					</div>
+ 					
+ 					<div class="form-group">
+ 					<label for="his" class="form-control-label" >History</label>
+ 					<input type="text" class="form-control" id="his" name="his" placeholder ="history" value="" onkeypress="return isNumberKey(event)">
+ 					</div>
+ 					
+ 					<div class="form-group">
+ 					<label for="cre" class="form-control-label" >CRE</label>
+ 					<input type="text" class="form-control" id="cre" name="cre" placeholder ="cre" value="" onkeypress="return isNumberKey(event)">
+ 					</div>
+ 				</div>
+ 				<div class="modal-footer">
+ 				
+ 					<button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+ 					
+ 					<input type="submit" class="btn btn-primary" value="save" />
+ 				</div>
+ 				</div>
+ 			
+ 			</div>
+ 		
+ 		</div>
+ 		
+ 	</form>
+ 
+ </div>
+ </body>
+<!-- content be inserted above -->
+</div>
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</html>
